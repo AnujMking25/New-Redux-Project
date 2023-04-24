@@ -30,14 +30,15 @@ const CartSlice = createSlice({
     
     },
     removedCart(state,action){
-        const existingitem=state.items.find(item=>item.id === action.payload.id)
+      console.log(state.items.find(item=>item.id === action.payload.id));
+              const existingitem=state.items.find(item=>item.id === action.payload.id)
         state.totalQuantity--;
-        // console.log("removed====>",existingitem);
+        console.log("removed====>",existingitem);
         if(existingitem.quantity===1){
             state.items=state.items.filter(item=>item.id !== action.payload.id)
         }else{
             existingitem.quantity--;
-            existingitem.totalPrice -=action.payload.price
+            existingitem.totalPrice -= existingitem.price
         }
     }
   },

@@ -3,12 +3,15 @@ import classes from './CartItem.module.css';
 import { cartAction } from '../Store/CartSlice';
 const CartItem = (props) => {
 const disptch=useDispatch();
-  const { id,title, quantity, total, price } = props.item;
+  const { id,title,description, quantity, total, price } = props.item;
 
 
 function onDecrimentHandler(){
-  console.log("id==>==>",id);
-  disptch(cartAction.removedCart(id))
+
+  disptch(cartAction.removedCart({id:id}))
+}
+function onIncrementHandler(){
+  disptch(cartAction.addCart({id:id, title:title,price:price,description:description,quantity:quantity}))
 }
   return (
     <li className={classes.item}>
@@ -25,7 +28,7 @@ function onDecrimentHandler(){
         </div>
         <div className={classes.actions}>
           <button onClick={onDecrimentHandler}>-</button>
-          <button>+</button>
+          <button onClick={onIncrementHandler}>+</button>
         </div>
       </div>
     </li>
